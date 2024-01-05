@@ -15,6 +15,17 @@ public class Event {
     private Date date;
     private String time;
 
+    public Event(){
+
+    }
+    public Event(int eventId, String name, Date date, String time) {
+        super();
+        this.eventId = eventId;
+        this.name = name;
+        this.date = date;
+        this.time = time;
+    }
+
     // Геттеры и сеттеры
 
     public int getEventId() {
@@ -47,5 +58,15 @@ public class Event {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventId=" + eventId +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

@@ -55,6 +55,7 @@
 <!-- <img th:src="@{/assets/img/img.png}" alt="Image" class="img-fluid"> -->
 
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-10 mt-5">
@@ -68,7 +69,7 @@
     </div>
 </div>
 
-<!--<div align="center">
+<div align="center">
     <h1>Sales Records</h1>
 
     <table border="1" cellpadding="10">
@@ -76,26 +77,32 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Item Name</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Action</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Venue</th>
 
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="sale : ${listSale}">
-            <td th:text="${sale.id}">ID</td>
-            <td th:text="${sale.item}">Item Name</td>
-            <td th:text="${sale.quantity}">Quantity</td>
-            <td th:text="${sale.amount}">Amount</td>
+        <tr th:each="event: ${eventList}">
+            <td th:text="${event.eventId}">ID</td>
+            <td th:text="${event.name}">Name</td>
+            <td th:text="${event.date}">Date</td>
+            <td th:text="${event.time}">Time</td>
         </tr>
         </tbody>
 
     </table>
 
-</div>-->
+</div>
+
+<div>
+    <h2>Debug Info</h2>
+    <pre th:text="${eventList}"></pre>
+</div>
+
 
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
