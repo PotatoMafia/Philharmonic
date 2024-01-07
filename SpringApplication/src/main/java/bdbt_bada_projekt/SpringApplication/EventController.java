@@ -28,6 +28,6 @@ public class EventController {
         /* Import java.util.List */
         List<Event> eventList = dao.list();
         model.addAttribute("eventList", eventList);
-        return "index";
+        return "/index";
     }
 }
