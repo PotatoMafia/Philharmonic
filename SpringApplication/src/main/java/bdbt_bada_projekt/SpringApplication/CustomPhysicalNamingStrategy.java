@@ -1,7 +1,6 @@
 package bdbt_bada_projekt.SpringApplication;
 
-import org.hibernate.boot.model.naming.Identifier;
-import org.hibernate.boot.model.naming.PhysicalNamingStrategy;
+import org.hibernate.boot.model.naming.Identifier;;
 import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
 import org.springframework.stereotype.Component;

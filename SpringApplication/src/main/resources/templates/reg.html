@@ -158,63 +158,49 @@
     <div class="container">
         <div class="heading_container heading_center">
             <h2>
-                Sign In
+                Registration
             </h2>
         </div>
         <div class="row">
             <div class="col-md-6">
-
-
                 <div class="container">
-                    <form method="post" th:action="@{/login}">
-
+                    <form method="post" th:action="@{/register}">
                         <div class="form-group">
-                            <label for="login">Login:</label>
-                            <input id="login" type="text" placeholder="Enter login" autocomplete="off"
-                                   class="form-control" name="username"/>
+                            <label for="name">Name:</label>
+                            <input id="name" type="text" placeholder="Enter your name" class="form-control" name="name"/>
                         </div>
-
+                        <div class="form-group">
+                            <label for="surname">Surname:</label>
+                            <input id="surname" type="text" placeholder="Enter your surname" class="form-control" name="surname"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Telephone number:</label>
+                            <input id="phoneNumber" type="text" placeholder="Enter your telephone number" class="form-control" name="phoneNumber"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input id="address" type="text" placeholder="Enter your address" class="form-control" name="address"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input id="email" type="email" placeholder="Enter your email" class="form-control" name="email"/>
+                        </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
-                            <input id="password" type="password" placeholder="Enter your password"
-                                   autocomplete="off" class="form-control" name="password"/>
+                            <input id="password" type="password" placeholder="Enter your password" class="form-control" name="password"/>
                         </div>
-
-                        <div th:if="${param.error}" style="color:red; margin-bottom:15px">
-                            ERROR: Invalid username or password!
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password:</label>
+                            <input id="confirmPassword" type="password" placeholder="Confirm your password" class="form-control" name="confirmPassword"/>
                         </div>
-
-                        <button class="btn btn-primary" type="submit" value="logIn">Log In</button>
-
-
-                        <g>
-
-                        </g>
-                        <g>
-
-                        </g>
-                        <g>
-
-                        </g>
-                        <g>
-
-                        </g>
+                        <button class="btn btn-primary" type="submit" value="createUser">Create new user</button>
                     </form>
-                    <form method="post" th:action="@{/reg}">
-                        <a class="btn btn-primary" href="/reg">Create new user</a>
-                    </form>
-
                 </div>
             </div>
-
-            <!-- <div class="col-md-6">
-               <div class="map_container ">
-                 <div id="googleMap"></div>
-               </div>
-             </div>-->
         </div>
     </div>
 </section>
+
 <!-- end login section -->
 
 <!-- footer section -->
