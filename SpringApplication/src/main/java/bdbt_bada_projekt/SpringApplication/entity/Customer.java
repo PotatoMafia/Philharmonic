@@ -1,30 +1,32 @@
 package bdbt_bada_projekt.SpringApplication.entity;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "C##AKUGACZ.\"Customer\"")
+@Table(name = "\"Customers\"")
 public class Customer {
     @Id
-    @Column(name = "C##AKUGACZ.\"Customer\".\"Customer_id\"")
+    @Column(name = "\"Customer_id\"")
     private int customerId;
 
-    @Column(name = "C##AKUGACZ.\"Customer\".\"Name\"")
+    @Column(name = "\"Name\"")
     private String name;
 
-    @Column(name = "C##AKUGACZ.\"Customer\".\"Surname\"")
+    @Column(name = "\"Surname\"")
     private String surname;
 
-    @Column(name = "C##AKUGACZ.\"Customer\".\"Phone_number\"", length = 15)
+    @Column(name = "\"Phone_number\"", length = 15)
     private String phoneNumber;
 
-    @Column(name = "C##AKUGACZ.\"Customer\".\"Address\"")
+    @Column(name = "\"Address\"")
     private String address;
 
-    @Column(name = "C##AKUGACZ.\"Customer\".\"PersonalNumber\"")
+    @Column(name = "\"Personal_number\"")
     private String personalNumber;
 
-    @Column(name = "C##AKUGACZ.\"Customer\".\"Email\"")
+    @Column(name = "\"Email\"")
     private String email;
 
     public Customer(int id, String name, String surname, String phoneNumber, String address, String personalNumber, String email) {

@@ -30,6 +30,11 @@
   <!-- responsive style -->
   <link th:href="@{css/responsive.css}" rel="stylesheet" />
 
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
 </head>
 
 <body class="sub_page">
@@ -161,15 +166,17 @@
 
       <div class="filters-content">
         <div class="row grid">
-          <div th:each="event : ${events}" class="col-sm-6 col-lg-4 all pasta">
+          <div th:each="event : ${events}" class="col-sm-6 col-lg-4 all pasta" data-filter-class="${' ' + getFilterClass(#dates.format(event.date, 'yyyy-MM-dd HH:mm:ss'))}">
+            <div data-filter-class-th="${data-filter-class}">
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img th:src="@{images/f9.png}" alt="">
+                  <img th:src="@{'images/events/__${event.eventId}__.png'}" alt="">
                 </div>
                 <div class="detail-box">
                   <h5 th:text="${event.name}">Event Name</h5>
-                  <p th:text="${event.date}">Event Date</p>
+                  <p th:text="${#strings.length(event.description) > 35 ? #strings.substring(event.description, 0, 35) + '...' : event.description}">Event Description</p>
+
                   <!-- Other event details -->
                   <div class="options">
                     <h6>
@@ -236,6 +243,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   </section>
@@ -344,6 +352,9 @@
 
     </div>
   </section>
+
+  <!-- Include external JavaScript file -->
+  <script th:src="@{/js/filters.js}" defer="defer"></script>
 </body>
 
 </html>

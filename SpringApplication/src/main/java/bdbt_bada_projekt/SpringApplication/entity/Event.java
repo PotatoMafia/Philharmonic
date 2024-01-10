@@ -12,16 +12,18 @@ public class Event {
     private String name;
     private Date date;
     private String time;
+    private String description;
 
     public Event(){
 
     }
-    public Event(int eventId, String name, Date date, String time) {
+    public Event(int eventId, String name, Date date, String time, String description) {
         super();
         this.eventId = eventId;
         this.name = name;
         this.date = date;
         this.time = time;
+        this.description = description;
     }
 
     // Геттеры и сеттеры
@@ -56,6 +58,14 @@ public class Event {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
