@@ -26,8 +26,6 @@ public class Event {
         this.description = description;
     }
 
-    // Геттеры и сеттеры
-
     public int getEventId() {
         return eventId;
     }

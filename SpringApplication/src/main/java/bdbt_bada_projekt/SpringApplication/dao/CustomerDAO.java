@@ -1,11 +1,13 @@
 package bdbt_bada_projekt.SpringApplication.dao;
 
 import bdbt_bada_projekt.SpringApplication.entity.Customer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -13,9 +15,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+
 @Repository
+@Component
+@Slf4j
 public class CustomerDAO {
 
+    @Value("${spring.datasource.username}")
+    private String username;
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -24,63 +31,112 @@ public class CustomerDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    public void save(Customer customer) {
-//        SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
-//
-//        // Проверка, был ли передан customerId
-//        if (Objects.equals(customer.getCustomerId(), null)) {
-//            // Если customerId не был передан, генерируем новый
-//            customer.setCustomerId(findMaxCustomerId() + 1);
-//            System.out.println("Generated CustomerId: " + customer.getCustomerId());
-//        } else {
-//            // Если customerId уже был установлен, используем переданное значение
-//            System.out.println("Customer already has an Id: " + customer.getCustomerId());
-//        }
-//
-//
-//        insertActor.withTableName("C##AKUGACZ.\"Customer\"")
-//                .usingColumns("\"Customer_id\"", "\"Name\"", "\"Surname\"", "\"Phone_number\"", "\"Address\"", "\"Email\"");
-//
-//        System.out.println("New CustomerId: " + customer.getCustomerId());
-//        BeanPropertySqlParameterSource beanPropertySqlParameterSource = new BeanPropertySqlParameterSource(customer);
-//        System.out.println(beanPropertySqlParameterSource);
-//        insertActor.execute(beanPropertySqlParameterSource);
-//    }
 
     public void save(Customer customer) {
-        SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
-        insertActor.withTableName("C##AKUGACZ.\"Customer\"");
-        insertActor.usingColumns("\"Customer_id\"", "\"Name\"", "\"Surname\"", "\"Phone_number\"", "\"Address\"", "\"Email\"");
-        Map<String, Object> parameters = new HashMap<>(3);
-        if (Objects.equals(customer.getCustomerId(), null)) {
-            customer.setCustomerId(findMaxCustomerId() + 1);
-            System.out.println("Generated CustomerId: " + customer.getCustomerId());
-        } else {
-            System.out.println("Customer already has an Id: " + customer.getCustomerId());
+        try {
+            SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
+            insertActor.withTableName("C##AKUGACH.\"Customers\"");
+            insertActor.usingColumns("\"Customer_id\"", "\"Name\"", "\"Surname\"", "\"Phone_number\"", "\"Personal_number\"", "\"Email\"", "\"Street\"", "\"Local_number\"", "\"Postcode\"", "\"Philharmonic_id\"","\"Password\"", "\"Role\"");
+
+            Map<String, Object> parameters = new HashMap<>(3);
+            if (Objects.equals(findMaxCustomerId(), null)) {
+                customer.setCustomerId(0);
+            } else {
+                customer.setCustomerId(findMaxCustomerId() + 1);
+            }
+
+
+            parameters.put("\"Customer_id\"", customer.getCustomerId());
+            parameters.put("\"Name\"", customer.getName());
+            parameters.put("\"Surname\"", customer.getSurname());
+            parameters.put("\"Phone_number\"", customer.getPhoneNumber());
+            parameters.put("\"Personal_number\"", customer.getPersonalNumber());
+            parameters.put("\"Email\"", customer.getEmail());
+            parameters.put("\"Street\"", customer.getStreet());
+            parameters.put("\"Local_number\"", customer.getLocalNumber());
+            parameters.put("\"Postcode\"", customer.getPostcode());
+            parameters.put("\"Philharmonic_id\"", customer.getPhilharmonic_id());
+            parameters.put("\"Password\"", customer.getPassword());
+            parameters.put("\"Role\"", customer.getRole());
+
+            insertActor.execute(parameters);
+            log.info("Customer with email [{}] saved", customer.getEmail());
+//            System.out.println("Customer saved successfully.");
+        } catch (Exception e) {
+//            System.out.println("Error saving customer: " + e.getMessage());
+            // Optionally, log the exception using a logging framework
+            //logger.error("Error saving customer", e);
+            throw new RuntimeException("Error saving customer", e);
         }
-        parameters.put("\"Customer_id\"", customer.getCustomerId());
-        parameters.put("\"Name\"", customer.getName());
-        parameters.put( "\"Surname\"", customer.getSurname());
-        parameters.put("\"Phone_number\"",customer.getPhoneNumber() );
-        parameters.put( "\"Address\"",customer.getAddress());
-        parameters.put("\"Email\"",customer.getEmail());
-        insertActor.execute(parameters);
     }
 
 
-    public int findMaxCustomerId() {
-        String sql = "SELECT MAX(\"Customer_id\") FROM C##AKUGACZ.\"Customer\"";
 
-        return jdbcTemplate.queryForObject(sql, Integer.class);
+    public Integer findMaxCustomerId() {
+        String sql = "SELECT MAX(\"Customer_id\") FROM C##AKUGACH.\"Customers\"";
+        Integer maxCustomerId = jdbcTemplate.queryForObject(sql, Integer.class);
+
+        // Check for null and return 0 if null
+        return maxCustomerId != null ? maxCustomerId : 0;
     }
+
+    public void update(Customer customer) {
+        try {
+            String sql = "UPDATE C##AKUGACH.\"Customers\" SET " +
+                    "\"Name\" = ?, " +
+                    "\"Surname\" = ?, " +
+                    "\"Phone_number\" = ?, " +
+                    "\"Personal_number\" = ?, " +
+                    "\"Street\" = ?, " +
+                    "\"Local_number\" = ?, " +
+                    "\"Postcode\" = ?, " +
+                    "\"Philharmonic_id\" = ?, " +
+                    "\"Password\" = ?, " +
+                    "\"Role\" = ? " +
+                    "WHERE \"Email\" = ?";
+
+            jdbcTemplate.update(
+                    sql,
+                    customer.getName(),
+                    customer.getSurname(),
+                    customer.getPhoneNumber(),
+                    customer.getPersonalNumber(),
+                    customer.getStreet(),
+                    customer.getLocalNumber(),
+                    customer.getPostcode(),
+                    customer.getPhilharmonic_id(),
+                    customer.getPassword(),
+                    customer.getRole(),
+                    customer.getEmail()
+            );
+
+            log.info("Customer with email [{}] updated", customer.getEmail());
+        } catch (Exception e) {
+            log.error("Error updating customer: {}", e.getMessage());
+            throw new RuntimeException("Error updating customer", e);
+        }
+    }
+
 
 
     public List<Customer> list() {
 
-        String sql = "SELECT * FROM C##AKUGACZ.\"Customer\"";
+        String sql = "SELECT * FROM C##AKUGACH.\"Customers\"";
         List<Customer> customerList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Customer.class));
 
         return customerList;
+    }
+
+
+    public void deleteByEmail(String email) {
+        String sql = "DELETE FROM C##AKUGACH.\"Customers\" WHERE \"Email\" = ?";
+        try {
+            jdbcTemplate.update(sql, email);
+            log.info("Customer with email [{}] deleted", email);
+        } catch (Exception e) {
+            log.error("Error deleting customer with email [{}]: {}", email, e.getMessage());
+            throw new RuntimeException("Error deleting customer", e);
+        }
     }
 
     public Customer get(int id) {
@@ -88,10 +144,52 @@ public class CustomerDAO {
     }
 
     public void delete(int id) {
-
+        String sql = "DELETE FROM C##AKUGACH.\"Customers\" WHERE \"Customer_id\" = ?";
+        try {
+            jdbcTemplate.update(sql, id);
+//            System.out.println("Customer deleted successfully.");
+        } catch (Exception e) {
+//            System.out.println("Error deleting customer: " + e.getMessage());
+            throw new RuntimeException("Error deleting customer", e);
+        }
     }
 
-    public void update(Customer customer) {
 
+
+    public boolean emailExists(String email) {
+        String sql = "SELECT COUNT(*) FROM C##AKUGACH.\"Customers\" WHERE \"Email\" = ?";
+        try {
+            Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
+            return count != null && count > 0;
+        } catch (Exception e) {
+            log.error("Error checking email existence: {}", e.getMessage());
+            return false;
+        }
     }
+
+    public Customer findByEmail(String email) {
+        email = email.trim();
+        String sql = "SELECT * FROM C##AKUGACH.\"Customers\" WHERE \"Email\" = ?";
+        try {
+            List<Customer> customers = jdbcTemplate.query(sql, new Object[]{email}, BeanPropertyRowMapper.newInstance(Customer.class));
+            if (!customers.isEmpty()) {
+                return customers.get(0);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Error finding customer by email: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Customer> findAll() {
+        String sql = "SELECT * FROM C##AKUGACH.\"Customers\"";
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Customer.class));
+    }
+
+
+
+
+
 }
