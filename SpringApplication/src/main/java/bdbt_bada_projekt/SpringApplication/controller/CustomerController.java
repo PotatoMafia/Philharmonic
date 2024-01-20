@@ -59,7 +59,7 @@ public class CustomerController {
         Object loggedInUser =  session.getAttribute("loggedInUser");
 
         // Retrieve customer details from the database based on email
-        Customer customer = customerService.findByEmail(loggedInUserEmail);
+        Customer customer = customerService.getCustomerWithTicketsByEmail(loggedInUserEmail);
 
         // Add customer details to the model
         model.addAttribute("customer", customer);

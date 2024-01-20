@@ -141,4 +141,26 @@ public class CustomerService implements UserDetailsService {
         customerDAO.deleteByEmail(email);
     }
 
+    public Customer getCustomerWithTicketsByEmail(String email) {
+        Customer customer = customerDAO.findByEmail(email);
+
+        if (customer != null && customer.getTransactions() != null) {
+            log.info("Number of transactions for customer {}: {}", email, customer.getTransactions().size());
+
+            customer.getTransactions().forEach(transaction -> {
+                transaction.getTickets().size(); // Load tickets eagerly
+
+                // Log information about tickets
+                transaction.getTickets().forEach(ticket -> {
+                    log.info("Ticket details: {}", ticket.toString());
+                });
+            });
+        } else {
+            log.info("No transactions found for customer: {}", email);
+        }
+
+        return customer;
+    }
+
+
 }
