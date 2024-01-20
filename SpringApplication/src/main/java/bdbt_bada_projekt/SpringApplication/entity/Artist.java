@@ -1,14 +1,55 @@
 package bdbt_bada_projekt.SpringApplication.entity;
 
-import javax.persistence.Entity;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.*;
+
+@Slf4j
 @Entity
+@Table(name = "\"Artists\"")
 public class Artist extends Employee {
+    @Id
+    @Column(name = "\"Employee_id\"")
+    private int employeeId;
+    @Column(name = "\"Skills\"")
     private String skills;
-    private boolean isMusic;
-    private boolean isSinger;
+    @Column(name = "\"Is_music\"")
+    private String isMusic;
 
-    // Геттеры и сеттеры
+    @Override
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getIsMusic() {
+        return isMusic;
+    }
+
+    public void setIsMusic(String isMusic) {
+        this.isMusic = isMusic;
+    }
+
+    public String getIsSinger() {
+        return isSinger;
+    }
+
+    public void setIsSinger(String isSinger) {
+        this.isSinger = isSinger;
+    }
+
+    @Column(name = "\"Is_singer\"")
+    private String isSinger;
+
+    public int isEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+
+
 
     public String getSkills() {
         return skills;
@@ -18,19 +59,5 @@ public class Artist extends Employee {
         this.skills = skills;
     }
 
-    public boolean isMusic() {
-        return isMusic;
-    }
 
-    public void setMusic(boolean music) {
-        isMusic = music;
-    }
-
-    public boolean isSinger() {
-        return isSinger;
-    }
-
-    public void setSinger(boolean singer) {
-        isSinger = singer;
-    }
 }
