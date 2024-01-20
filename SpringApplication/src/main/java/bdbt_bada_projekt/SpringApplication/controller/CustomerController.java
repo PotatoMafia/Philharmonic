@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -36,6 +38,36 @@ public class CustomerController {
         customerService.saveCustomer(customer);
         return "redirect:/login";
     }
+
+    @PostMapping("/updateCustomer")
+    public String updateCustomer(@ModelAttribute Customer customer) {
+        // Update customer details in the database
+        customerService.customerUpdate(customer);
+
+        // Redirect to a confirmation page or any other page
+        return "redirect:/confirmationPage";
+    }
+
+    @GetMapping("/main_user")
+    public String showMainUserPage(Model model, HttpSession session) {
+        // Your logic to retrieve data or perform operations before rendering the page
+
+        // Add attributes to the model if needed
+        // Get the logged-in customer's email from the session
+        String loggedInUserEmail = (String) session.getAttribute("loggedInUser");
+
+        Object loggedInUser =  session.getAttribute("loggedInUser");
+
+        // Retrieve customer details from the database based on email
+        Customer customer = customerService.findByEmail(loggedInUserEmail);
+
+        // Add customer details to the model
+        model.addAttribute("customer", customer);
+
+        // Return the name of the Thymeleaf template (HTML page) to render
+        return "user/main_user";
+    }
+
 
 
 //    @RequestMapping(value = {"/registration"})
