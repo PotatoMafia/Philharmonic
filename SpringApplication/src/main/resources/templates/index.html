@@ -65,7 +65,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" th:href="@{${session.registered} ? '/main_user' : '/login'}" th:if="${session.role == 'USER'}" th:text="USER"></a>
+                <a class="nav-link" th:if = "${session.registered}" th:href="@{${session.role == 'USER'} ? '/main_user' : '/main_admin'}" th:text="USER"></a>
                 <a class="nav-link" th:href="@{/login}" th:unless="${session.registered}" th:text="LOGIN"></a>
               </li>
 
