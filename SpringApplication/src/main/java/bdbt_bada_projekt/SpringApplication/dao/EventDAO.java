@@ -15,7 +15,7 @@ public class EventDAO {
     }
 
     public List<Event> list() {
-        String sql = "SELECT * FROM C##AKUGACZ.\"Events\"";
+        String sql = "SELECT * FROM \"Events\"";
 
 
         List<Event> eventList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Event.class));
