@@ -33,7 +33,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b
-                            style="text-transform:capitalize">[[${#httpServletRequest.remoteUser}]]</b></a>
+                            style="text-transform:capitalize"><span th:text="${session.loggedInUser}"></span></b></a>
                 </li>
 
             </ul>
@@ -48,13 +48,58 @@
             <form method="post" th:action="@{/index}">
                 <div class="form-group">
                     <label style="font-size:30px" th:inline="text">Welcome <a
-                            style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
+                            style="color:lightskyblue; text-transform:capitalize"><b><span th:text="${session.loggedInUser}"></span></b></a>
                         to the main page!</label>
-                    <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
+                    <div style="font-size:20px">If you want to log out, click "Logout" button under this text.</div>
+                </div>
+            </form>
+
+
+            <!-- Form for editing customer details -->
+            <form th:action="@{/updateCustomer}" th:object="${customer}" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="email" th:field="*{email}" readonly required/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" required/>
                 </div>
 
+                <div class="form-group">
+                    <label for="surname">Surname:</label>
+                    <input type="text" class="form-control" id="surname" th:field="*{surname}" required/>
+                </div>
 
+                <div class="form-group">
+                    <label for="phoneNumber">Phone number:</label>
+                    <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="personalNumber">Personal number:</label>
+                    <input type="text" class="form-control" id="personalNumber" th:field="*{personalNumber}" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="street">Street:</label>
+                    <input type="text" class="form-control" id="street" th:field="*{street}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="localNumber">Local number:</label>
+                    <input type="text" class="form-control" id="localNumber" th:field="*{localNumber}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="postcode">Postcode:</label>
+                    <input type="text" class="form-control" id="postcode" th:field="*{postcode}" required/>
+                </div>
+
+                <!-- Add similar fields for other customer details -->
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
             </form>
+
+
             <form action="/logout" method="post">
                 <button class="btn btn-primary" type="submit">Logout</button>
             </form>
@@ -62,7 +107,6 @@
         </div>
 
     </div>
-</div>
 
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>

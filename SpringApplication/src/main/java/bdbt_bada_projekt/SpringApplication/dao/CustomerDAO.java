@@ -35,7 +35,7 @@ public class CustomerDAO {
     public void save(Customer customer) {
         try {
             SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
-            insertActor.withTableName("C##AKUGACH.\"Customers\"");
+            insertActor.withTableName("\"Customers\"");
             insertActor.usingColumns("\"Customer_id\"", "\"Name\"", "\"Surname\"", "\"Phone_number\"", "\"Personal_number\"", "\"Email\"", "\"Street\"", "\"Local_number\"", "\"Postcode\"", "\"Philharmonic_id\"","\"Password\"", "\"Role\"");
 
             Map<String, Object> parameters = new HashMap<>(3);
@@ -73,7 +73,7 @@ public class CustomerDAO {
 
 
     public Integer findMaxCustomerId() {
-        String sql = "SELECT MAX(\"Customer_id\") FROM C##AKUGACH.\"Customers\"";
+        String sql = "SELECT MAX(\"Customer_id\") FROM \"Customers\"";
         Integer maxCustomerId = jdbcTemplate.queryForObject(sql, Integer.class);
 
         // Check for null and return 0 if null
@@ -82,7 +82,7 @@ public class CustomerDAO {
 
     public void update(Customer customer) {
         try {
-            String sql = "UPDATE C##AKUGACH.\"Customers\" SET " +
+            String sql = "UPDATE \"Customers\" SET " +
                     "\"Name\" = ?, " +
                     "\"Surname\" = ?, " +
                     "\"Phone_number\" = ?, " +
@@ -121,7 +121,7 @@ public class CustomerDAO {
 
     public List<Customer> list() {
 
-        String sql = "SELECT * FROM C##AKUGACH.\"Customers\"";
+        String sql = "SELECT * FROM \"Customers\"";
         List<Customer> customerList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Customer.class));
 
         return customerList;
@@ -129,7 +129,7 @@ public class CustomerDAO {
 
 
     public void deleteByEmail(String email) {
-        String sql = "DELETE FROM C##AKUGACH.\"Customers\" WHERE \"Email\" = ?";
+        String sql = "DELETE FROM \"Customers\" WHERE \"Email\" = ?";
         try {
             jdbcTemplate.update(sql, email);
             log.info("Customer with email [{}] deleted", email);
@@ -144,7 +144,7 @@ public class CustomerDAO {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM C##AKUGACH.\"Customers\" WHERE \"Customer_id\" = ?";
+        String sql = "DELETE FROM \"Customers\" WHERE \"Customer_id\" = ?";
         try {
             jdbcTemplate.update(sql, id);
 //            System.out.println("Customer deleted successfully.");
@@ -157,7 +157,7 @@ public class CustomerDAO {
 
 
     public boolean emailExists(String email) {
-        String sql = "SELECT COUNT(*) FROM C##AKUGACH.\"Customers\" WHERE \"Email\" = ?";
+        String sql = "SELECT COUNT(*) FROM \"Customers\" WHERE \"Email\" = ?";
         try {
             Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
             return count != null && count > 0;
@@ -169,7 +169,7 @@ public class CustomerDAO {
 
     public Customer findByEmail(String email) {
         email = email.trim();
-        String sql = "SELECT * FROM C##AKUGACH.\"Customers\" WHERE \"Email\" = ?";
+        String sql = "SELECT * FROM \"Customers\" WHERE \"Email\" = ?";
         try {
             List<Customer> customers = jdbcTemplate.query(sql, new Object[]{email}, BeanPropertyRowMapper.newInstance(Customer.class));
             if (!customers.isEmpty()) {
@@ -184,7 +184,7 @@ public class CustomerDAO {
     }
 
     public List<Customer> findAll() {
-        String sql = "SELECT * FROM C##AKUGACH.\"Customers\"";
+        String sql = "SELECT * FROM \"Customers\"";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Customer.class));
     }
 
