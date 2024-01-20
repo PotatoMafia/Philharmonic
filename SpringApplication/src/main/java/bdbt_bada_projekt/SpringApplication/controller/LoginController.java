@@ -38,9 +38,11 @@ public class LoginController {
             session.setAttribute("role", role);
             if (role.equals("ADMIN")) {
                 session.setAttribute("loggedInUser", email);
+                session.setAttribute("registered", true);
                 return "redirect:/main_admin";
             } else if (role.equals("USER")) {
                 session.setAttribute("loggedInUser", email);
+                session.setAttribute("registered", true);
                 return "redirect:/main_user";
             }
         }

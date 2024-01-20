@@ -21,12 +21,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    private CustomUserDetailsService customUserDetailsService;
 
 
-
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -44,9 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
 
-        http
-                .logout()
-                .logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
     }
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
