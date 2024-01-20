@@ -53,9 +53,12 @@
                     <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
                 </div>
 
-                <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout
-                </button>
+
             </form>
+            <form action="/logout" method="post">
+                <button class="btn btn-primary" type="submit">Logout</button>
+            </form>
+
         </div>
 
     </div>
@@ -66,6 +69,13 @@
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/script.js}"></script>
+
+
+<script>
+    function setRegisteredFalse() {
+        registered = false;
+    }
+</script>
 
 </body>
 </html>

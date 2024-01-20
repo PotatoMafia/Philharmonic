@@ -58,4 +58,12 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+
+        session.setAttribute("registered", false);
+
+        return "index";
+    }
+
 }

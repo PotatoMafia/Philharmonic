@@ -29,14 +29,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/registration", "/login").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/main").authenticated()
-                .antMatchers("/main_admin").hasAuthority("ADMIN")
-                .antMatchers("/edit_users").hasAuthority("ADMIN")
-                //.antMatchers("/admin/**").permitAll()
+                //.antMatchers("/main_admin").hasAuthority("ADMIN")
+                //.antMatchers("/edit_users").hasAuthority("ADMIN")
+                .antMatchers("/admin/**").permitAll()
                 .antMatchers("/user/**").hasAuthority("USER")
-                .antMatchers("/registration").not().fullyAuthenticated()
-                .and()
-                .logout()
-                .logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
+                .antMatchers("/registration").not().fullyAuthenticated();
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
 
     }
     @Override
