@@ -100,6 +100,7 @@ public class CustomerService implements UserDetailsService {
     public String login(String email, String password) {
         Customer customer = customerDAO.findByEmail(email);
         log.info("Customer was found by email [{}]", email);
+        log.info("Customer role: [{}]", customer.getRole());
         if (customer != null && checkPassword(email, password)) {
             return customer.getRole();
         }

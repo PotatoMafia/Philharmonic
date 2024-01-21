@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" th:href="@{images/celloicon.png}" type="">
+
+  <title> Philharmonic - admin page </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}" />
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link th:href="@{css/font-awesome.min.css}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link th:href="@{css/style.css}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link th:href="@{css/responsive.css}" rel="stylesheet" />
+  <style>
+    h2 {
+      color: white;
+    }
+
+    body {
+      background-color: #171616; /* DARK GREY */
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0); /* Transparent black background for the header */
+    }
+
+    .nav-link {
+      color: white !important; /* Override the default link color */
+    }
+
+    .hero_area {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bg-box img {
+      width: 100%;
+      height: auto;
+      opacity: 0.7;
+    }
+
+    .heading_container h2 {
+      color: white;
+    }
+
+    .table {
+      color: white;
+    }
+
+    .form-group label {
+      color: white;
+    }
+
+    .form-group input,
+    .form-group select {
+      background-color: #333; /* Dark background for input fields */
+      color: white;
+      border: 1px solid white;
+    }
+
+    .form-group input[type="submit"],
+    .form-group button {
+      background-color: #555; /* Darker background for buttons */
+      color: white;
+      border: 1px solid white;
+      cursor: pointer;
+      padding: 10px 20px;
+      font-size: 16px;
+      transition: background-color 0.1s ease;
+      z-index: 1; /* Устанавливаем z-index, чтобы поле ввода было поверх других элементов */
+      position: relative; /* Устанавливаем позицию, чтобы z-index имел эффект */
+    }
+
+    .form-group input[type="submit"]:hover,
+    .form-group button:hover {
+      background-color: #777; /* Darker background on hover */
+    }
+
+    #newUserPasswordError {
+      color: red;
+    }
+
+    .resizable-input {
+      width: 100%; /* Устанавливаем ширину поля ввода на 100% */
+      transition: width 0.3s ease; /* Добавляем анимацию для плавного изменения ширины */
+      z-index: 1; /* Устанавливаем z-index, чтобы поле ввода было поверх других элементов */
+      position: relative; /* Устанавливаем позицию, чтобы z-index имел эффект */
+    }
+
+    .resizable-input:focus {
+      width: 150%; /* Устанавливаем новую ширину при фокусе (вы можете настроить под свои нужды) */
+    }
+  </style>
+
+
+
+</head>
+
+<body class="sub_page">
+<div class="hero_area">
+  <div class="bg-box">
+    <img th:src="@{images/mainPage.jpg}" alt="" />
+  </div>
+  <!-- header section starts -->
+  <header class="header_section">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" href="\index">
+                        <span>
+                            Philharmonic
+                        </span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""> </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav  mx-auto ">
+            <li class="nav-item">
+              <a class="nav-link" href="\main_admin">MAIN PAGE </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="\edit_users">EDIT USERS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="\edit_employee">EDIT EMPLOYEES</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="\edit_event">EDIT EVENTS<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="\logout">LOGOUT</a>
+            </li>
+            <li><a class="btn btn-warning" th:href="@{/index}">TO MAIN PAGE</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+</div>
+  <!-- end header section -->
+<section class="food_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>Events</h2>
+    </div>
+
+    <table class="table">
+      <thead>
+      <tr class="table-group-1">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Description</th>
+        <th>Venue ID</th>
+        <th>Artist ID</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="event : ${events}">
+        <td th:text="${event.eventId}"></td>
+
+        <td>
+          <form method="post" th:action="@{/updateEventName}">
+            <input type="hidden" name="eventId" th:value="${event.eventId}" />
+            <input type="text" name="newName" th:value="${event.name}" class="form-control resizable-input" />
+            <button type="submit" class="btn btn-success">Save</button>
+          </form>
+        </td>
+
+        <td th:text="${event.date}"></td>
+        <td th:text="${event.time}"></td>
+
+        <td>
+          <form method="post" th:action="@{/updateEventDescription}">
+            <input type="hidden" name="eventId" th:value="${event.eventId}" />
+            <input type="text" name="newDescription" th:value="${event.description}" class="form-control resizable-input" />
+            <button type="submit" class="btn btn-success">Save</button>
+          </form>
+        </td>
+
+        <td th:text="${event.venueId}"></td>
+        <td>
+          <form method="post" th:action="@{/updateEventArtist}">
+            <input type="hidden" name="eventId" th:value="${event.eventId}" />
+            <select name="newArtistId" class="form-control">
+              <option value="" selected disabled th:text="${event.artistId}"></option>
+              <th:block th:each="artist : ${artists}">
+                <option th:value="${artist.employeeId}" th:text="${artist.employeeId + ' - ' + artist.name}"></option>
+              </th:block>
+            </select>
+            <button type="submit" class="btn btn-success">Save</button>
+          </form>
+        </td>
+
+        <td>
+          <form method="post" th:action="@{/deleteEvent}">
+            <input type="hidden" name="eventId" th:value="${event.eventId}" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<div class="container">
+  <form method="post" th:action="@{/createEvent}" class="new-event-form">
+    <h2>Add new Event</h2>
+    <div class="form-group">
+      <label for="newEventName">Event Name:</label>
+      <input type="text" id="newEventName" name="name" placeholder="Enter event name" required class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="newEventDate">Event Date:</label>
+      <input type="date" id="newEventDate" name="date" required class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="newEventTime">Event Time:</label>
+      <input type="time" id="newEventTime" name="time" required class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="newEventDescription">Event Description:</label>
+      <textarea id="newEventDescription" name="description" placeholder="Enter event description" required class="form-control "></textarea>
+    </div>
+    <div class="form-group">
+      <label for="newEventVenue">Event Venue:</label>
+      <input type="text" id="newEventVenue" name="venue" placeholder="Enter event venue" required class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="newEventArtist" style="color: black;">Event Artist:</label>
+      <select id="newEventArtist" name="artistId" class="form-control">
+        <option value="" selected disabled>Select Artist</option>
+        <th:block th:each="artist : ${artists}">
+          <option th:value="${artist.employeeId}" th:text="${artist.name}" style="color: black;"></option>
+        </th:block>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add new event</button>
+  </form>
+</div>
+
+
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-AQ4BtA5UABt5cmIVqN+s+QJb9uh6A7D4AyTLwDhY8s+uOy7iTSKmm/WCjxW1Jb3BC1MZaTkfL2Us5ZWmJ05uZg==" crossorigin="anonymous" />
+
+<!-- Bootstrap-datepicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-0Qp97+6nuF9IYMAaenUgJii1lc3mf1F6czW9fYsk21zhOZ2jt7ivGo7T/4uT8ZspS7JKrIyQ7OSdsOfkEuzdvg==" crossorigin="anonymous"></script>
+
+<!-- Bootstrap-datepicker language (optional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js" integrity="sha512-+Y76QfZNXvL7yXim1vzR8sA+mv3t+2VdEYzlum/3m6qkwCZ+RwrSRBm1UDsX8ePdXolEjlj44HoxTKIpePjL0g==" crossorigin="anonymous"></script>
+
+<!-- Скрипт для активации datepicker -->
+<script>
+  $(document).ready(function () {
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd'
+    });
+  });
+</script>
+</body>
+</html>

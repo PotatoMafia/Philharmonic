@@ -175,7 +175,8 @@
                 </div>
                 <div class="detail-box">
                   <h5 th:text="${event.name}">Event Name</h5>
-                  <p th:text="${#strings.length(event.description) > 35 ? #strings.substring(event.description, 0, 35) + '...' : event.description}">Event Description</p>
+                  <span text="${#strings.length(event.description) > 35 ? #strings.substring(event.description, 0, 35) + '...' : event.description}"></span>
+<!--                  <p th:text="${#length(event.description) > 35 ? #substring(event.description, 0, 35) + '...' : event.description}">Event Description</p>-->
 
                   <!-- Other event details -->
                   <div class="options">

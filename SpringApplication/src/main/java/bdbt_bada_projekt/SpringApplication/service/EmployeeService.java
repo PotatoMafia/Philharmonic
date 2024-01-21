@@ -1,6 +1,8 @@
 package bdbt_bada_projekt.SpringApplication.service;
 
+import bdbt_bada_projekt.SpringApplication.dao.ArtistDAO;
 import bdbt_bada_projekt.SpringApplication.dao.EmployeeDAO;
+import bdbt_bada_projekt.SpringApplication.entity.Artist;
 import bdbt_bada_projekt.SpringApplication.entity.Customer;
 import bdbt_bada_projekt.SpringApplication.entity.Employee;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.List;
 public class EmployeeService implements UserDetailsService {
 
     private final EmployeeDAO employeeDAO;
+    private final ArtistDAO artistDAO;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -56,11 +59,11 @@ public class EmployeeService implements UserDetailsService {
     }
 
     public void deleteEmployeeByEmail(String email) {
-        log.info("Successfully deleted:[{}]",email);
+        log.info("Successfully deleted:[{}]", email);
         employeeDAO.deleteByEmail(email);
     }
 
-    public void employeeUpdateByName(String email, String name){
+    public void employeeUpdateByName(String email, String name) {
         Employee employee = findByEmail(email);
         if (employee != null) {
             employee.setName(name);
@@ -102,6 +105,20 @@ public class EmployeeService implements UserDetailsService {
             employee.setLocalNumber(localNumber);
             employeeDAO.update(employee);
         }
+    }
+
+    public List<Employee> getAllEmployeesWithArtists() {
+        List<Employee> employees = employeeDAO.findAll();
+        List<Artist> artists = artistDAO.findAll();
+        for (Artist artist : artists) {
+                Employee employee = new Employee();
+                employee.setEmployeeId(artist.getEmployeeId());
+            if (employee.getName() != null) {
+                employees.add(employee);}
+
+        }
+
+        return employees;
     }
 
     public boolean isEmailAlreadyInUse(Employee newEmployee) {

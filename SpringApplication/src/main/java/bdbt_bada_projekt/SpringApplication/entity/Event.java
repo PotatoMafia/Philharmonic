@@ -1,23 +1,67 @@
 package bdbt_bada_projekt.SpringApplication.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "\"Events\"")
-public class Event {
+public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "\"Event_id\"")
     private int eventId;
+    @Column(name = "\"Name\"")
     private String name;
-    private Date date;
+
+    @Column(name = "\"Date\"")
+    private String date;
+    @Column(name = "\"Time\"")
     private String time;
+
+    @Column(name = "\"Description\"")
     private String description;
 
-    public Event(){
+    public String getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(String artistId) {
+        this.artistId = artistId;
+    }
+
+    @Column(name = "\"Artist_id\"")
+    private String artistId;
+
+    public int getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(int venueId) {
+        this.venueId = venueId;
+    }
+
+    public int getPhilharmonicId() {
+        return philharmonicId;
+    }
+
+    public void setPhilharmonicId(int philharmonicId) {
+        this.philharmonicId = philharmonicId;
+    }
+
+    @Column(name = "\"Venue_id\"")
+    private int venueId;
+
+
+    @Column(name = "\"Philharmonic_id\"")
+    private int philharmonicId = 1;
+
+    public Event() {
 
     }
-    public Event(int eventId, String name, Date date, String time, String description) {
+
+    public Event(int eventId, String name, String date, String time, String description) {
         super();
         this.eventId = eventId;
         this.name = name;
@@ -42,11 +86,11 @@ public class Event {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -120,9 +120,9 @@ public class EditEmployeeController {
                 int id = employeeService.findByEmail(employee.getEmail()).getEmployeeId();
                 log.info("For Artist setted id:[{}]", id);
                 artist.setSkills(skills);
-                if(isSinger==null) isSinger = "N";
+                if(isSinger==null) isSinger = "N";else isSinger = "Y";
                 artist.setIsSinger(isSinger);
-                if(isMusician==null) isMusician = "N";
+                if(isMusician==null) isMusician = "N";else isMusician = "Y";
                 artist.setIsMusic(isMusician);
 
                 // Save the artist

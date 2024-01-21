@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
-   private CustomUserDetailsService customUserDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
 
     @Override
@@ -29,9 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/index", "/registration", "/login").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/main").authenticated()
-                .antMatchers("/main_admin").hasAuthority("ADMIN")
-                .antMatchers("/edit_users").hasAuthority("ADMIN")
-                //.antMatchers("/admin/**").permitAll()
+//                .antMatchers("/main_admin").hasAuthority("ADMIN")
+//                .antMatchers("/edit_users").hasAuthority("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/**").hasAuthority("USER")
                 .antMatchers("/registration").not().fullyAuthenticated();
 //                .and()
@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
 
     }
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());

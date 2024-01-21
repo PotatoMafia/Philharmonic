@@ -16,6 +16,29 @@ public class Artist extends Employee {
     @Column(name = "\"Is_music\"")
     private String isMusic;
 
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getSurname() {
+        return surname;
+    }
+
+    @Override
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    private String name;
+    private String surname;
     @Override
     public int getEmployeeId() {
         return employeeId;
