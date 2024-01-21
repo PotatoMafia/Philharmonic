@@ -108,6 +108,24 @@
 
     </div>
 
+    <div th:each="ticket : ${tickets}">
+        <div>
+            <p th:text="${ticket.type}"></p>
+            <p th:text="${ticket.rowNumber}"></p>
+            <p th:text="${ticket.placeNumber}"></p>
+            <p th:text="${ticket.price}"></p>
+            <!-- Add more ticket information as needed -->
+            <!-- Display event information -->
+            <div>
+                <h4>Event Information:</h4>
+                <p th:text="${ticket.event.name}"></p>
+                <p th:text="${ticket.event.date}"></p>
+                <!-- Add more event information as needed -->
+            </div>
+        </div>
+        <hr/> <!-- Add a horizontal line between tickets for better separation -->
+    </div>
+
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>

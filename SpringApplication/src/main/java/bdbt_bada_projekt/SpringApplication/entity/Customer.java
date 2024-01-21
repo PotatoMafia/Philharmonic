@@ -5,19 +5,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Slf4j
     @Entity
     @Table(name = "\"Customers\"")
     public class Customer implements UserDetails {
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Transaction> transactions;
 
         //private PasswordEncoder passwordEncoder;
         @Id
@@ -54,8 +56,25 @@ import java.util.Collection;
         @Size(min = 6, message = "Password must be at least 6 characters")
         private String password;
 
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
 
-        public String getRole() {
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public List<Ticket> getAllTickets() {
+        List<Ticket> allTickets = new ArrayList<>();
+        if (transactions != null) {
+            for (Transaction transaction : transactions) {
+                allTickets.addAll(transaction.getTickets());
+            }
+        }
+        return allTickets;
+    }
+
+    public String getRole() {
             return role;
         }
 

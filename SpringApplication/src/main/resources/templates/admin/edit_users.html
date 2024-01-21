@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" th:href="@{images/celloicon.png}" type="">
+
+    <title> Philharmonic - admin page </title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}" />
+
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <!-- nice select  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+    <!-- font awesome style -->
+    <link th:href="@{css/font-awesome.min.css}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{css/style.css}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link th:href="@{css/responsive.css}" rel="stylesheet" />
+    <style>
+        h2 {
+            color: white;
+        }
+
+        body {
+            background-color: #171616; /* DARK GREY */
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0); /* Transparent black background for the header */
+        }
+
+        .nav-link {
+            color: white !important; /* Override the default link color */
+        }
+
+        .hero_area {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-box img {
+            width: 100%;
+            height: auto;
+            opacity: 0.7;
+        }
+
+        .heading_container h2 {
+            color: white;
+        }
+
+        .table {
+            color: white;
+        }
+
+        .form-group label {
+            color: white;
+        }
+
+        .form-group input,
+        .form-group select {
+            background-color: #333; /* Dark background for input fields */
+            color: white;
+            border: 1px solid white;
+        }
+
+        .form-group input[type="submit"],
+        .form-group button {
+            background-color: #555; /* Darker background for buttons */
+            color: white;
+            border: 1px solid white;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: background-color 0.1s ease;
+            z-index: 1; /* Устанавливаем z-index, чтобы поле ввода было поверх других элементов */
+            position: relative; /* Устанавливаем позицию, чтобы z-index имел эффект */
+        }
+
+        .form-group input[type="submit"]:hover,
+        .form-group button:hover {
+            background-color: #777; /* Darker background on hover */
+        }
+
+        #newUserPasswordError {
+            color: red;
+        }
+
+        .resizable-input {
+            width: 100%; /* Устанавливаем ширину поля ввода на 100% */
+            transition: width 0.3s ease; /* Добавляем анимацию для плавного изменения ширины */
+            z-index: 1; /* Устанавливаем z-index, чтобы поле ввода было поверх других элементов */
+            position: relative; /* Устанавливаем позицию, чтобы z-index имел эффект */
+        }
+
+        .resizable-input:focus {
+            width: 150%; /* Устанавливаем новую ширину при фокусе (вы можете настроить под свои нужды) */
+        }
+    </style>
+
+
+
+</head>
+
+<body class="sub_page">
+<div class="hero_area">
+    <div class="bg-box">
+        <img th:src="@{images/mainPage.jpg}" alt="" />
+    </div>
+    <!-- header section starts -->
+    <header class="header_section">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="\index">
+                        <span>
+                            Philharmonic
+                        </span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  mx-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link" href="\main_admin">MAIN PAGE </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="\edit_users">EDIT USERS <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="\edit_employee">EDIT EMPLOYEES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="\edit_event">EDIT EVENTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="\logout">LOGOUT</a>
+                        </li>
+                        <li><a class="btn btn-warning" th:href="@{/index}">TO MAIN PAGE</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header section -->
+</div>
+
+
+<!-- ... (your existing body content) ... -->
+
+<!-- customers table section -->
+<!-- customers table section -->
+<section class="food_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>Customers</h2>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.customerId}"></td>
+                <td>
+                    <form method="post" th:action="@{/updateName}">
+                        <input type="hidden" name="email" th:value="${customer.email}" />
+                        <input type="hidden" name="attributeName" value="name" />
+                        <input type="text" name="newName" th:value="${customer.name}" class="form-control resizable-input" />
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </td>
+
+                <td>
+                    <form method="post" th:action="@{/updateSurname}">
+                        <input type="hidden" name="email" th:value="${customer.email}" />
+                        <input type="hidden" name="attributeSurname" value="surname" />
+                        <input type="text" name="newSurname" th:value="${customer.surname}" class="form-control resizable-input" />
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </td>
+                <td th:text="${customer.email}"></td>
+                <td>
+                    <form method="post" th:action="@{/updateRole}">
+                        <input type="hidden" name="email" th:value="${customer.email}" />
+                        <select name="role" th:value="${customer.role}" class="form-control">
+                            <option value="USER" th:selected="${customer.role == 'USER'}">USER</option>
+                            <option value="ADMIN" th:selected="${customer.role == 'ADMIN'}">ADMIN</option>
+                        </select>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" th:action="@{/deleteCustomer}">
+                        <input type="hidden" name="email" th:value="${customer.email}" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form method="post" th:action="@{/createUser}" class="new-user-form">
+            <h2>Create New User</h2>
+            <div class="form-group">
+                <label for="newUserName">Name:</label>
+                <input type="text" id="newUserName" name="name" placeholder="Enter name" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserSurname">Surname:</label>
+                <input type="text" id="newUserSurname" name="surname" placeholder="Enter surname" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserPhoneNumber">Telephone number:</label>
+                <input type="text" id="newUserPhoneNumber" name="phoneNumber" placeholder="Enter telephone number" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserStreet">Street:</label>
+                <input type="text" id="newUserStreet" name="street" placeholder="Enter street" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserLocalNumber">Local Number:</label>
+                <input type="text" id="newUserLocalNumber" name="localNumber" placeholder="Enter local number" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserPostcode">Postcode:</label>
+                <input type="text" id="newUserPostcode" name="postcode" placeholder="Enter postcode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserPersonalNumber">Personal Number:</label>
+                <input type="text" id="newUserPersonalNumber" name="personalNumber" placeholder="Enter personal number" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserEmail">Email:</label>
+                <input type="email" id="newUserEmail" name="email" placeholder="Enter email" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserPassword">Password:</label>
+                <input type="password" id="newUserPassword" name="password" placeholder="Enter password" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="newUserConfirmPassword">Confirm Password:</label>
+                <input type="password" id="newUserConfirmPassword" name="confirmPassword" placeholder="Confirm password" required oninput="validateNewUserPassword()" class="form-control" />
+                <small id="newUserPasswordError" style="color: red;"></small>
+            </div>
+            <button type="submit" class="btn btn-primary">Create New User</button>
+        </form>
+    </div>
+</section>
+
+
+<script>
+    function validateNewUserPassword() {
+        var password = document.getElementById("newUserPassword").value;
+        var confirmPassword = document.getElementById("newUserConfirmPassword").value;
+        var passwordError = document.getElementById("newUserPasswordError");
+
+        if (password !== confirmPassword) {
+            passwordError.innerText = "Passwords do not match";
+        } else {
+            passwordError.innerText = "";
+        }
+    }
+</script>
+<!-- ... (your existing body content) ... -->
+
+</body>
+</html>

@@ -2,9 +2,14 @@ package bdbt_bada_projekt.SpringApplication.service;
 
 import bdbt_bada_projekt.SpringApplication.dao.CustomerDAO;
 import bdbt_bada_projekt.SpringApplication.entity.Customer;
+import bdbt_bada_projekt.SpringApplication.entity.Ticket;
+import bdbt_bada_projekt.SpringApplication.entity.Transaction;
 import bdbt_bada_projekt.SpringApplication.repository.CustomerRepository;
+import bdbt_bada_projekt.SpringApplication.repository.TicketRepository;
+import bdbt_bada_projekt.SpringApplication.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -25,6 +31,19 @@ public class CustomerService implements UserDetailsService {
     private final CustomerDAO customerDAO;
     private final PasswordEncoder passwordEncoder;
     private CustomerRepository customerRepository;
+    private TicketRepository ticketRepository;
+    private TransactionRepository transactionRepository;
+
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository, CustomerDAO customerDAO, PasswordEncoder passwordEncoder, TransactionRepository transactionRepository, TicketRepository ticketRepository) {
+        this.customerRepository = customerRepository;
+        this.customerDAO = customerDAO;
+        this.passwordEncoder = passwordEncoder;
+        this.ticketRepository= ticketRepository;
+        this.transactionRepository = transactionRepository;
+    }
+
+
 
 //    public void saveCustomer(Customer customer) {
 //        customerDAO.save(customer);
@@ -141,5 +160,26 @@ public class CustomerService implements UserDetailsService {
     public void deleteCustomerByEmail(String email) {
         customerDAO.deleteByEmail(email);
     }
+
+    public List<Ticket> getAllTicketsForCustomer(String email) {
+        Customer customer = customerRepository.findByEmail(email)
+                .orElse(null);
+
+        if (customer != null) {
+            List<Transaction> transactions = transactionRepository.findByCustomer(customer);
+            List<Ticket> allTickets = new ArrayList<>();
+
+            for (Transaction transaction : transactions) {
+                List<Ticket> tickets = ticketRepository.findByTransaction(transaction);
+                allTickets.addAll(tickets);
+            }
+
+            return allTickets;
+        } else {
+            // Handle the case when customer is not found
+            return Collections.emptyList();
+        }
+    }
+
 
 }

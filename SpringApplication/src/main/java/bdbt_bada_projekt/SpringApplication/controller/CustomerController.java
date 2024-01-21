@@ -1,6 +1,7 @@
 package bdbt_bada_projekt.SpringApplication.controller;
 
 import bdbt_bada_projekt.SpringApplication.entity.Customer;
+import bdbt_bada_projekt.SpringApplication.entity.Ticket;
 import bdbt_bada_projekt.SpringApplication.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -59,9 +61,12 @@ public class CustomerController {
         Object loggedInUser =  session.getAttribute("loggedInUser");
 
         // Retrieve customer details from the database based on email
-        Customer customer = customerService.findByEmail(loggedInUserEmail);
+        List<Ticket> tickets;
+        tickets = customerService.getAllTicketsForCustomer(loggedInUserEmail);
+        model.addAttribute("tickets", tickets);
 
-        // Add customer details to the model
+        Customer customer = customerService.findByEmail(loggedInUserEmail);
+            // Add customer details to the model
         model.addAttribute("customer", customer);
 
         // Return the name of the Thymeleaf template (HTML page) to render
