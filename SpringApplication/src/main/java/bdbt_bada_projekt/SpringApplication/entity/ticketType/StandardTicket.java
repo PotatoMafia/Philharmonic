@@ -3,9 +3,11 @@ package bdbt_bada_projekt.SpringApplication.entity.ticketType;
 import bdbt_bada_projekt.SpringApplication.entity.Ticket;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-public class StandartTicket extends Ticket {
+@Table(name = "\"Standard_tickets\"")
+public class StandardTicket extends Ticket {
     private boolean standardAccess;
     private boolean standardParking;
 

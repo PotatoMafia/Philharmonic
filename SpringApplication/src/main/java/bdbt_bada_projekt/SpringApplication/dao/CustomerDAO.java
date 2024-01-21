@@ -168,17 +168,22 @@ public class CustomerDAO {
     }
 
     public Customer findByEmail(String email) {
-        email = email.trim();
-        String sql = "SELECT * FROM \"Customers\" WHERE \"Email\" = ?";
-        try {
-            List<Customer> customers = jdbcTemplate.query(sql, new Object[]{email}, BeanPropertyRowMapper.newInstance(Customer.class));
-            if (!customers.isEmpty()) {
-                return customers.get(0);
-            } else {
+        if (email != null) {
+            email = email.trim();
+            String sql = "SELECT * FROM \"Customers\" WHERE \"Email\" = ?";
+            try {
+                List<Customer> customers = jdbcTemplate.query(sql, new Object[]{email}, BeanPropertyRowMapper.newInstance(Customer.class));
+                if (!customers.isEmpty()) {
+                    return customers.get(0);
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                System.out.println("Error finding customer by email: " + e.getMessage());
                 return null;
             }
-        } catch (Exception e) {
-            System.out.println("Error finding customer by email: " + e.getMessage());
+        }
+        else {
             return null;
         }
     }

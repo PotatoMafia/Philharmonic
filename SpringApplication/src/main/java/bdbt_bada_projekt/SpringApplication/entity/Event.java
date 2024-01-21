@@ -2,6 +2,7 @@ package bdbt_bada_projekt.SpringApplication.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "\"Events\"")
@@ -13,6 +14,9 @@ public class Event {
     private Date date;
     private String time;
     private String description;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Ticket> tickets;
 
     public Event(){
 

@@ -2,12 +2,18 @@ package bdbt_bada_projekt.SpringApplication.entity.ticketType;
 
 import bdbt_bada_projekt.SpringApplication.entity.Ticket;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "\"Vip_tickets\"")
 public class VIPTicket extends Ticket {
+
     private String vipService;
     private boolean vipAccess;
+
     private boolean vipParking;
 
     // Геттеры и сеттеры

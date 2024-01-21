@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -61,6 +62,16 @@ import java.util.List;
 
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public List<Ticket> getAllTickets() {
+        List<Ticket> allTickets = new ArrayList<>();
+        if (transactions != null) {
+            for (Transaction transaction : transactions) {
+                allTickets.addAll(transaction.getTickets());
+            }
+        }
+        return allTickets;
     }
 
     public String getRole() {
