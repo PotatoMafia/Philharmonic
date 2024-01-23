@@ -99,7 +99,7 @@
                       "Without music, life would be a mistake."
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="\events" class="btn1">
                         See events
                       </a>
                     </div>
@@ -120,7 +120,7 @@
                       "Music is the divine way to tell beautiful, poetic things to the heart."
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="\events" class="btn1">
                         See events
                       </a>
                     </div>
@@ -140,7 +140,7 @@
                     <p>
                       "Music is the universal language of mankind."                    </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="\events" class="btn1">
                         See events
                       </a>
                     </div>
@@ -163,66 +163,67 @@
     <!-- end slider section -->
   </div>
 
-  <section class="food_section layout_padding-bottom">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Our Events
-        </h2>
-      </div>
+<!--  <section class="food_section layout_padding-bottom">-->
+<!--    <div class="container">-->
+<!--      <div class="heading_container heading_center">-->
+<!--        <h2>-->
+<!--          Our Events-->
+<!--        </h2>-->
+<!--      </div>-->
 
-      <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        <li data-filter=".today">Today</li>
-        <li data-filter=".tomorrow">Tomorrow</li>
-        <li data-filter=".nextWeek">Next week</li>
-        <li data-filter=".nextMonth">Next month</li>
-      </ul>
+<!--      <ul class="filters_menu">-->
+<!--        <li class="active" data-filter="*">All</li>-->
+<!--        <li data-filter=".today">Today</li>-->
+<!--        <li data-filter=".tomorrow">Tomorrow</li>-->
+<!--        <li data-filter=".nextWeek">Next week</li>-->
+<!--        <li data-filter=".nextMonth">Next month</li>-->
+<!--      </ul>-->
 
-      <div align="center">
-        <table border="1" cellpadding="10">
+<!--      <div align="center">-->
+<!--        <table border="1" cellpadding="10">-->
 
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Venue</th>
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>Name</th>-->
+<!--            <th>Date</th>-->
+<!--            <th>Time</th>-->
+<!--            <th>Venue</th>-->
 
-          </tr>
-          </thead>
+<!--          </tr>-->
+<!--          </thead>-->
 
-          <tbody>
-          <tr th:each="event: ${eventList}">
-            <td th:text="${event.eventId}">ID</td>
-            <td th:text="${event.name}">Name</td>
-            <td th:text="${event.date}">Date</td>
-            <td th:text="${event.time}">Time</td>
-          </tr>
-          </tbody>
+<!--          <tbody>-->
+<!--          <tr th:each="event: ${eventList}">-->
+<!--            <td th:text="${event.eventId}">ID</td>-->
+<!--            <td th:text="${event.name}">Name</td>-->
+<!--            <td th:text="${event.date}">Date</td>-->
+<!--            <td th:text="${event.time}">Time</td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
 
-        </table>
+<!--        </table>-->
 
-      </div>
+<!--      </div>-->
 
 
-      <div class="btn-box">
-        <a href="">
-          View More
-        </a>
-      </div>
-    </div>
-  </section>
+<!--      <div class="btn-box">-->
+<!--        <a href="">-->
+<!--          View More-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
 
-  <!-- end food section -->
+<!--  &lt;!&ndash; end food section &ndash;&gt;-->
 
   <!-- about section -->
 
-  <section class="about_section layout_padding" style="background-image: url('/images/WeAPhilharmonic.jpg'); background-size: cover; background-position: center;">
-      <div class="container">
-          <div class="row">
-              <div class="col-md-6">
+  <section class="about_section layout_padding"
+           style="background-image: url('/images/WeAPhilharmonic.jpg'); background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
           <div class="bg-box">
             <img th:src="@{/images/WeAPhilharmonic.jpg}" alt="">
           </div>
@@ -231,17 +232,44 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2>
-                Welcome to Philarmonic
+                Welcome to Philharmonic
               </h2>
             </div>
             <p>
-              Information From class Philarmonic
+              In the heart of a bustling city, where the notes of creativity floated in the air, the
+              Philharmonic was born out of a visionary dream. It was a time when artistry and passion
+              converged to create a symphony that would resonate for generations to come.
+
+              The story begins with a group of visionary musicians and patrons who, captivated by the magic of
+              orchestral music, envisioned a haven where the finest melodies would come to life. Their dream
+              was not just to build a concert hall but to create an immersive experience that would transcend
+              the boundaries of time.
+
+              The founders, with unwavering dedication, embarked on a journey to bring this dream to fruition.
+              They scoured the city for the perfect location, a place where the acoustics would be flawless,
+              and the ambiance would inspire both performers and audiences alike.
+
+              After years of meticulous planning and fundraising, the Philharmonic's doors swung open for the
+              first time. The inaugural performance was a breathtaking spectacle, with the grandeur of the
+              orchestra filling the hall and leaving everyone in awe.
+
+              Since that momentous day, the Philharmonic has become a cultural icon, attracting world-class
+              musicians and captivating audiences with its enchanting performances. It stands as a testament to
+              the power of human imagination and the transformative nature of music.
+
+              Today, the Philharmonic continues to evolve, embracing new sounds and genres while staying true to
+              its classical roots. It remains a beacon of artistic expression, inviting all to experience the
+              magic of music in its purest form.
+
+              Welcome to the Philharmonic – where every note tells a story, and every performance is a
+              celebration of the human spirit.
             </p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- end about section -->
 
@@ -310,7 +338,7 @@
 
 
   <!-- footer section -->
-  <footer class="under_section">
+  <footer class="under_section" style="background-color: black; color: white;">
     <div class="container">
       <div class="row">
         <div class="col-md-4 footer-col">
@@ -322,20 +350,20 @@
               <a href="">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
-                  Location
-                </span>
+                                Philharmonic Hall, Symphony Street, City
+                            </span>
               </a>
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
-                </span>
+                                Call +01 1234567890
+                            </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
-                </span>
+                                info@philharmonic.com
+                            </span>
               </a>
             </div>
           </div>
@@ -346,22 +374,22 @@
               Philharmonic
             </a>
             <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+              The Philharmonic is a hub of musical excellence, bringing together the finest musicians to create unforgettable symphonies and performances. Join us in celebrating the magic of music!
             </p>
-            <div class="footer_social">
-              <a href="">
+            <div class="address_social">
+              <a href="#">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="#">
                 <i class="fa fa-twitter" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="#">
                 <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="#">
                 <i class="fa fa-instagram" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="#">
                 <i class="fa fa-pinterest" aria-hidden="true"></i>
               </a>
             </div>
@@ -372,15 +400,16 @@
             Opening Hours
           </h4>
           <p>
-            Everyday
+            Monday - Sunday
           </p>
           <p>
-            10.00 Am -10.00 Pm
+            10:00 AM - 10:00 PM
           </p>
         </div>
       </div>
     </div>
   </footer>
+
   <!-- footer section -->
 
   <!-- jQery -->

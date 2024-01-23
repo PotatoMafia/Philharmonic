@@ -35,6 +35,7 @@ public class EventService {
     }
 
     public List<Event> getAllEvents() {
+        log.info("Getting events");
         return eventDAO.list();
     }
 

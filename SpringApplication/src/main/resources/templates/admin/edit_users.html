@@ -222,47 +222,47 @@
             </tbody>
         </table>
 
-        <form method="post" th:action="@{/createUser}" class="new-user-form">
+        <form method="post" th:action="@{/createUser}" class="new-user-form" onsubmit="return validateCharacterLimit()">
             <h2>Create New User</h2>
             <div class="form-group">
                 <label for="newUserName">Name:</label>
-                <input type="text" id="newUserName" name="name" placeholder="Enter name" required class="form-control" />
+                <input type="text" id="newUserName" name="name" placeholder="Enter name" required class="form-control" maxlength="20"/>
             </div>
             <div class="form-group">
                 <label for="newUserSurname">Surname:</label>
-                <input type="text" id="newUserSurname" name="surname" placeholder="Enter surname" required class="form-control" />
+                <input type="text" id="newUserSurname" name="surname" placeholder="Enter surname" required class="form-control" maxlength="30"/>
             </div>
             <div class="form-group">
                 <label for="newUserPhoneNumber">Telephone number:</label>
-                <input type="text" id="newUserPhoneNumber" name="phoneNumber" placeholder="Enter telephone number" class="form-control" />
+                <input type="text" id="newUserPhoneNumber" name="phoneNumber" placeholder="Enter telephone number" class="form-control" maxlength="15"/>
             </div>
             <div class="form-group">
                 <label for="newUserStreet">Street:</label>
-                <input type="text" id="newUserStreet" name="street" placeholder="Enter street" class="form-control" />
+                <input type="text" id="newUserStreet" name="street" placeholder="Enter street" class="form-control" maxlength="100" />
             </div>
             <div class="form-group">
                 <label for="newUserLocalNumber">Local Number:</label>
-                <input type="text" id="newUserLocalNumber" name="localNumber" placeholder="Enter local number" class="form-control" />
+                <input type="text" id="newUserLocalNumber" name="localNumber" placeholder="Enter local number" class="form-control" maxlength="6"/>
             </div>
             <div class="form-group">
                 <label for="newUserPostcode">Postcode:</label>
-                <input type="text" id="newUserPostcode" name="postcode" placeholder="Enter postcode" class="form-control" />
+                <input type="text" id="newUserPostcode" name="postcode" placeholder="Enter postcode" class="form-control" maxlength="6"/>
             </div>
             <div class="form-group">
                 <label for="newUserPersonalNumber">Personal Number:</label>
-                <input type="text" id="newUserPersonalNumber" name="personalNumber" placeholder="Enter personal number" class="form-control" />
+                <input type="text" id="newUserPersonalNumber" name="personalNumber" placeholder="Enter personal number" class="form-control" maxlength="11"/>
             </div>
             <div class="form-group">
                 <label for="newUserEmail">Email:</label>
-                <input type="email" id="newUserEmail" name="email" placeholder="Enter email" required class="form-control" />
+                <input type="email" id="newUserEmail" name="email" placeholder="Enter email" required class="form-control" maxlength="100"/>
             </div>
             <div class="form-group">
                 <label for="newUserPassword">Password:</label>
-                <input type="password" id="newUserPassword" name="password" placeholder="Enter password" required class="form-control" />
+                <input type="password" id="newUserPassword" name="password" placeholder="Enter password" required class="form-control" maxlength="15"/>
             </div>
             <div class="form-group">
                 <label for="newUserConfirmPassword">Confirm Password:</label>
-                <input type="password" id="newUserConfirmPassword" name="confirmPassword" placeholder="Confirm password" required oninput="validateNewUserPassword()" class="form-control" />
+                <input type="password" id="newUserConfirmPassword" name="confirmPassword" placeholder="Confirm password" required oninput="validateNewUserPassword()" class="form-control" maxlength="15"/>
                 <small id="newUserPasswordError" style="color: red;"></small>
             </div>
             <button type="submit" class="btn btn-primary">Create New User</button>
@@ -272,6 +272,40 @@
 
 
 <script>
+    function validateNewUserPassword() {
+        var password = document.getElementById("newUserPassword").value;
+        var confirmPassword = document.getElementById("newUserConfirmPassword").value;
+        var passwordError = document.getElementById("newUserPasswordError");
+
+        if (password !== confirmPassword) {
+            passwordError.innerText = "Passwords do not match";
+        } else {
+            passwordError.innerText = "";
+        }
+    }
+</script>
+
+<script>
+    function validateCharacterLimit() {
+        var inputs = document.querySelectorAll('.form-control');
+        var isValid = true;
+
+        inputs.forEach(function (input) {
+            if (input.value.length > input.maxLength) {
+                isValid = false;
+                input.style.borderColor = 'red'; // Change this line to customize the visual indication
+            } else {
+                input.style.borderColor = ''; // Reset the border
+            }
+        });
+
+        if (!isValid) {
+            alert('Please correct the input fields that exceed the character limit.');
+        }
+
+        return isValid;
+    }
+
     function validateNewUserPassword() {
         var password = document.getElementById("newUserPassword").value;
         var confirmPassword = document.getElementById("newUserConfirmPassword").value;
