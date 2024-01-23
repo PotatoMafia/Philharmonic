@@ -2,8 +2,7 @@ package bdbt_bada_projekt.SpringApplication.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "\"Events\"")
@@ -22,6 +21,9 @@ public class Event implements Serializable {
 
     @Column(name = "\"Description\"")
     private String description;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Ticket> tickets;
 
     public String getArtistId() {
         return artistId;

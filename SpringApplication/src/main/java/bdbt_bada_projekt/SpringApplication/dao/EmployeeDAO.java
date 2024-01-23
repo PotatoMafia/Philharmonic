@@ -34,7 +34,7 @@ public class EmployeeDAO {
     public void save(Employee employee) {
         try {
             SimpleJdbcInsert insertEmployee = new SimpleJdbcInsert(jdbcTemplate);
-            insertEmployee.withTableName("C##AKUGACH.\"Employees\"");
+            insertEmployee.withTableName("\"Employees\"");
             insertEmployee.usingColumns(
                     "\"Employee_id\"",
                     "\"Name\"",
@@ -84,7 +84,7 @@ public class EmployeeDAO {
     }
 
     public Integer findMaxEmployeeId() {
-        String sql = "SELECT MAX(\"Employee_id\") FROM C##AKUGACH.\"Employees\"";
+        String sql = "SELECT MAX(\"Employee_id\") FROM \"Employees\"";
         Integer maxEmployeeId = jdbcTemplate.queryForObject(sql, Integer.class);
 
         // Check for null and return 0 if null
@@ -93,7 +93,7 @@ public class EmployeeDAO {
 
     public void update(Employee employee) {
         try {
-            String sql = "UPDATE C##AKUGACH.\"Employees\" SET " +
+            String sql = "UPDATE \"Employees\" SET " +
                     "\"Name\" = ?, " +
                     "\"Surname\" = ?, " +
                     "\"Gender\" = ?, " +
@@ -133,13 +133,13 @@ public class EmployeeDAO {
     }
 
     public List<Employee> list() {
-        String sql = "SELECT * FROM C##AKUGACH.\"Employees\"";
+        String sql = "SELECT * FROM \"Employees\"";
         List<Employee> employeeList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Employee.class));
         return employeeList;
     }
 
     public void deleteByEmail(String email) {
-        String sql = "DELETE FROM C##AKUGACH.\"Employees\" WHERE \"Email\" = ?";
+        String sql = "DELETE FROM \"Employees\" WHERE \"Email\" = ?";
         if(artistDAO.findByEmployeeId(findByEmail(email).getEmployeeId()) != null){
            artistDAO.deleteByEmployeeId(findByEmail(email).getEmployeeId());
         }
@@ -157,7 +157,7 @@ public class EmployeeDAO {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM C##AKUGACH.\"Employees\" WHERE \"Employee_id\" = ?";
+        String sql = "DELETE FROM \"Employees\" WHERE \"Employee_id\" = ?";
         try {
             jdbcTemplate.update(sql, id);
         } catch (Exception e) {
@@ -166,7 +166,7 @@ public class EmployeeDAO {
     }
 
     public boolean emailExists(String email) {
-        String sql = "SELECT COUNT(*) FROM C##AKUGACH.\"Employees\" WHERE \"Email\" = ?";
+        String sql = "SELECT COUNT(*) FROM \"Employees\" WHERE \"Email\" = ?";
         try {
             Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
             return count != null && count > 0;
@@ -178,7 +178,7 @@ public class EmployeeDAO {
 
     public Employee findByEmail(String email) {
         email = email.trim();
-        String sql = "SELECT * FROM C##AKUGACH.\"Employees\" WHERE \"Email\" = ?";
+        String sql = "SELECT * FROM \"Employees\" WHERE \"Email\" = ?";
         try {
             List<Employee> employees = jdbcTemplate.query(sql, new Object[]{email}, BeanPropertyRowMapper.newInstance(Employee.class));
             if (!employees.isEmpty()) {
@@ -193,7 +193,7 @@ public class EmployeeDAO {
     }
 
     public Employee findByEmployeeId(int employeeId) {
-        String sql = "SELECT * FROM C##AKUGACH.\"Employees\" WHERE \"Employee_id\" = ?";
+        String sql = "SELECT * FROM \"Employees\" WHERE \"Employee_id\" = ?";
         try {
             List<Employee> employees = jdbcTemplate.query(sql, new Object[]{employeeId}, BeanPropertyRowMapper.newInstance(Employee.class));
             if (!employees.isEmpty()) {
@@ -209,7 +209,7 @@ public class EmployeeDAO {
 
 
     public List<Employee> findAll() {
-        String sql = "SELECT * FROM C##AKUGACH.\"Employees\"";
+        String sql = "SELECT * FROM \"Employees\"";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Employee.class));
     }
 }

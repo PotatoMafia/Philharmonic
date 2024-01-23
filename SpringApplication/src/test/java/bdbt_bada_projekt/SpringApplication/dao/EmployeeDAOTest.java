@@ -4,6 +4,7 @@ import bdbt_bada_projekt.SpringApplication.entity.Customer;
 import bdbt_bada_projekt.SpringApplication.entity.Employee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -14,12 +15,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeDAOTest {
     private EmployeeDAO dao;
 
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
     @BeforeEach
     void setUp() throws Exception{
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-        dataSource.setUsername("C##AKUGACH");
-        dataSource.setPassword("AKUGACH");
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
         /* Import JdbcTemplate */
         dao = new EmployeeDAO(new JdbcTemplate(dataSource));

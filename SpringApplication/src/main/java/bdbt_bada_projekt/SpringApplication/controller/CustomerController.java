@@ -47,7 +47,7 @@ public class CustomerController {
         customerService.customerUpdate(customer);
 
         // Redirect to a confirmation page or any other page
-        return "redirect:/confirmationPage";
+        return "redirect:/main_user";
     }
 
     @GetMapping("/main_user")

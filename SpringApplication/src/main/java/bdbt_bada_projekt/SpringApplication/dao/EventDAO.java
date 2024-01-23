@@ -32,7 +32,7 @@ public class EventDAO {
     public void save(Event event) {
         try {
             SimpleJdbcInsert insertEvent = new SimpleJdbcInsert(jdbcTemplate);
-            insertEvent.withTableName("C##AKUGACH.\"Events\"");
+            insertEvent.withTableName("\"Events\"");
             insertEvent.usingColumns(
                     "\"Event_id\"",
                     "\"Name\"",
@@ -74,7 +74,7 @@ public class EventDAO {
     }
 
     public Integer findMaxEventId() {
-        String sql = "SELECT MAX(\"Event_id\") FROM C##AKUGACH.\"Events\"";
+        String sql = "SELECT MAX(\"Event_id\") FROM \"Events\"";
         Integer maxEventId = jdbcTemplate.queryForObject(sql, Integer.class);
 
         // Check for null and return 0 if null
@@ -83,7 +83,7 @@ public class EventDAO {
 
     public void update(Event event) {
         try {
-            String sql = "UPDATE C##AKUGACH.\"Events\" SET " +
+            String sql = "UPDATE \"Events\" SET " +
                     "\"Name\" = ?, " +
                     "\"Date\" = ?, " +
                     "\"Time\" = ?, " +
@@ -114,7 +114,7 @@ public class EventDAO {
     }
 
     public void delete(int eventId) {
-        String sql = "DELETE FROM C##AKUGACH.\"Events\" WHERE \"Event_id\" = ?";
+        String sql = "DELETE FROM \"Events\" WHERE \"Event_id\" = ?";
         try {
             jdbcTemplate.update(sql, eventId);
             log.info("Event with id [{}] deleted", eventId);
@@ -125,12 +125,12 @@ public class EventDAO {
     }
 
     public List<Event> list() {
-        String sql = "SELECT * FROM C##AKUGACH.\"Events\"";
+        String sql = "SELECT * FROM \"Events\"";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Event.class));
     }
 
     public Event findById(int eventId) {
-        String sql = "SELECT * FROM C##AKUGACH.\"Events\" WHERE \"Event_id\" = ?";
+        String sql = "SELECT * FROM \"Events\" WHERE \"Event_id\" = ?";
         try {
             List<Event> events = jdbcTemplate.query(sql, new Object[]{eventId}, BeanPropertyRowMapper.newInstance(Event.class));
             return events.isEmpty() ? null : events.get(0);
@@ -142,7 +142,7 @@ public class EventDAO {
 
     public Event findByName(String eventName) {
         eventName = eventName.trim();
-        String sql = "SELECT * FROM C##AKUGACH.\"Events\" WHERE \"Name\" = ?";
+        String sql = "SELECT * FROM \"Events\" WHERE \"Name\" = ?";
         try {
             List<Event> events = jdbcTemplate.query(sql, new Object[]{eventName}, BeanPropertyRowMapper.newInstance(Event.class));
             return events.isEmpty() ? null : events.get(0);
@@ -154,7 +154,7 @@ public class EventDAO {
 
     public  boolean isExistName(String name){
         name = name.trim();
-        String sql = "SELECT * FROM C##AKUGACH.\"Events\" WHERE \"Name\" = ?";
+        String sql = "SELECT * FROM \"Events\" WHERE \"Name\" = ?";
         try {
             List<Event> events = jdbcTemplate.query(sql, new Object[]{name}, BeanPropertyRowMapper.newInstance(Event.class));
             return events.isEmpty() ?  false :true;

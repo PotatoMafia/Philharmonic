@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class EventDAOTest {
     private EventDAO dao;
     @Value("${spring.datasource.username}")
-    private String username = "C##AKUGACH";
+    private String username;
     @Value("${spring.datasource.password}")
-    private String password = "AKUGACH";
+    private String password;
     private Event event;
     @BeforeEach
     void setUp() throws Exception {
