@@ -1,4 +1,4 @@
-package bdbt_bada_projekt.SpringApplication;
+package bdbt_bada_projekt.SpringApplication.controller;
 
 import bdbt_bada_projekt.SpringApplication.dao.EventDAO;
 import bdbt_bada_projekt.SpringApplication.entity.Event;
