@@ -63,9 +63,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b
-                                style="text-transform:capitalize"><span th:text="${session.loggedInUser}"></span></b></a>
+                        <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b>
+                            <span th:text="${session.loggedInUser}"></span></b></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">logout</a>
+                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -78,10 +82,9 @@
         <div class="col-md-10 mt-5">
             <form method="post" th:action="@{/index}">
                 <div class="form-group">
-                    <label style="font-size:30px" th:inline="text">Welcome <a
-                            style="color:lightskyblue; text-transform:capitalize"><b><span th:text="${session.loggedInUser}"></span></b></a>
+                    <label style="font-size:30px; color: white" th:inline="text">Welcome <a
+                            style="color:lightskyblue; text-transform:capitalize"><b><span th:text="${customer.name} "></span> <span th:text="${customer.surname}"></span></b></a>
                         to the main page!</label>
-                    <div style="font-size:20px">If you want to log out, click "Logout" button under this text.</div>
                 </div>
             </form>
 
@@ -89,55 +92,62 @@
             <!-- Form for editing customer details -->
             <form th:action="@{/updateCustomer}" th:object="${customer}" method="post">
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email" style="color: white">Email:</label>
                     <input type="text" class="form-control" id="email" th:field="*{email}" readonly required/>
                 </div>
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name" style="color: white">Name:</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="surname">Surname:</label>
+                    <label for="surname" style="color: white">Surname:</label>
                     <input type="text" class="form-control" id="surname" th:field="*{surname}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="phoneNumber">Phone number:</label>
+                    <label for="phoneNumber" style="color: white">Phone number:</label>
                     <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="personalNumber">Personal number:</label>
+                    <label for="personalNumber" style="color: white">Personal number:</label>
                     <input type="text" class="form-control" id="personalNumber" th:field="*{personalNumber}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="street">Street:</label>
+                    <label for="street" style="color: white">Street:</label>
                     <input type="text" class="form-control" id="street" th:field="*{street}" required/>
                 </div>
                 <div class="form-group">
-                    <label for="localNumber">Local number:</label>
+                    <label for="localNumber" style="color: white">Local number:</label>
                     <input type="text" class="form-control" id="localNumber" th:field="*{localNumber}" required/>
                 </div>
                 <div class="form-group">
-                    <label for="postcode">Postcode:</label>
+                    <label for="postcode" style="color: white">Postcode:</label>
                     <input type="text" class="form-control" id="postcode" th:field="*{postcode}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="role" style="color: white"></label>
+                    <input type="hidden" class="form-control" id="role" th:field="*{role}" readonly required/>
+                </div>
+                <div class="form-group">
+                    <label for="password" style="color: white"></label>
+                    <input type="hidden" class="form-control" id="password" th:field="*{password}" readonly required/>
                 </div>
 
                 <!-- Add similar fields for other customer details -->
 
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary" style="float: left;">Save Changes</button>
             </form>
 
 
-            <form action="/logout" method="post">
-                <button class="btn btn-primary" type="submit">Logout</button>
-            </form>
+
 
         </div>
         <div class="table-responsive col-md-10 mt-5">
             <table class="table table-bordered table-light">
+                <label style="font-size:30px; color: white" th:inline="text">Your tickets: </label>
                 <thead>
                 <tr>
                     <th>Type</th>

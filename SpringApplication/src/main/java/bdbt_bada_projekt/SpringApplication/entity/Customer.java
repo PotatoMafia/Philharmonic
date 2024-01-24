@@ -56,6 +56,9 @@ import java.util.List;
         @Size(min = 6, message = "Password must be at least 6 characters")
         private String password;
 
+    @Column(name = "\"Role\"")
+    private String role;
+
     public List<Transaction> getTransactions() {
         return transactions;
     }
@@ -82,8 +85,7 @@ import java.util.List;
             this.role = role;
         }
 
-        @Column(name = "\"Role\"")
-        private String role;
+
 
 
         public Customer() {
