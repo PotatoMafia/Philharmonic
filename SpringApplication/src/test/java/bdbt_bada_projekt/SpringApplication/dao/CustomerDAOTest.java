@@ -19,7 +19,6 @@ class CustomerDAOTest {
     @Value("${spring.datasource.password}")
     private String password;
 
-
     @BeforeEach
     void setUp() throws Exception{
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

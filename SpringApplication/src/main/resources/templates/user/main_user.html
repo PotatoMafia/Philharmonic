@@ -1,45 +1,80 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Main User Page</title>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" th:href="@{/images/celloicon.png}" type="">
 
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <title> Main User page </title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <!-- nice select  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+    <!-- font awesome style -->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
 
 </head>
 <body>
+<div class="hero_area">
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="/static">BDBT Spring Boot Project - Part II</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/index}">Home</a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Main
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b
-                            style="text-transform:capitalize"><span th:text="${session.loggedInUser}"></span></b></a>
-                </li>
-
-            </ul>
-        </div>
+    <div class="bg-box">
+        <img th:src="@{/images/mainPage.jpg}" alt="">
     </div>
-</nav>
+
+<header class="header_section">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="\index">
+                        <span>
+                            Philharmonic
+                        </span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  mx-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/index}">Home</a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Main
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:inline="text" style="color:lightskyblue;">You are logged in as <b>
+                            <span th:text="${session.loggedInUser}"></span></b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">logout</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
 
 <div class="container">
     <div class="row">
@@ -47,10 +82,9 @@
         <div class="col-md-10 mt-5">
             <form method="post" th:action="@{/index}">
                 <div class="form-group">
-                    <label style="font-size:30px" th:inline="text">Welcome <a
-                            style="color:lightskyblue; text-transform:capitalize"><b><span th:text="${session.loggedInUser}"></span></b></a>
+                    <label style="font-size:30px; color: white" th:inline="text">Welcome <a
+                            style="color:lightskyblue; text-transform:capitalize"><b><span th:text="${customer.name} "></span> <span th:text="${customer.surname}"></span></b></a>
                         to the main page!</label>
-                    <div style="font-size:20px">If you want to log out, click "Logout" button under this text.</div>
                 </div>
             </form>
 
@@ -58,74 +92,95 @@
             <!-- Form for editing customer details -->
             <form th:action="@{/updateCustomer}" th:object="${customer}" method="post">
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email" style="color: white">Email:</label>
                     <input type="text" class="form-control" id="email" th:field="*{email}" readonly required/>
                 </div>
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name" style="color: white">Name:</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="surname">Surname:</label>
+                    <label for="surname" style="color: white">Surname:</label>
                     <input type="text" class="form-control" id="surname" th:field="*{surname}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="phoneNumber">Phone number:</label>
+                    <label for="phoneNumber" style="color: white">Phone number:</label>
                     <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="personalNumber">Personal number:</label>
+                    <label for="personalNumber" style="color: white">Personal number:</label>
                     <input type="text" class="form-control" id="personalNumber" th:field="*{personalNumber}" required/>
                 </div>
 
                 <div class="form-group">
-                    <label for="street">Street:</label>
+                    <label for="street" style="color: white">Street:</label>
                     <input type="text" class="form-control" id="street" th:field="*{street}" required/>
                 </div>
                 <div class="form-group">
-                    <label for="localNumber">Local number:</label>
+                    <label for="localNumber" style="color: white">Local number:</label>
                     <input type="text" class="form-control" id="localNumber" th:field="*{localNumber}" required/>
                 </div>
                 <div class="form-group">
-                    <label for="postcode">Postcode:</label>
+                    <label for="postcode" style="color: white">Postcode:</label>
                     <input type="text" class="form-control" id="postcode" th:field="*{postcode}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="role" style="color: white"></label>
+                    <input type="hidden" class="form-control" id="role" th:field="*{role}" readonly required/>
+                </div>
+                <div class="form-group">
+                    <label for="password" style="color: white"></label>
+                    <input type="hidden" class="form-control" id="password" th:field="*{password}" readonly required/>
                 </div>
 
                 <!-- Add similar fields for other customer details -->
 
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary" style="float: left;">Save Changes</button>
             </form>
 
 
-            <form action="/logout" method="post">
-                <button class="btn btn-primary" type="submit">Logout</button>
-            </form>
 
+
+        </div>
+        <div class="table-responsive col-md-10 mt-5">
+            <table class="table table-bordered table-light">
+                <label style="font-size:30px; color: white" th:inline="text">Your tickets: </label>
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Row Number</th>
+                    <th>Place Number</th>
+                    <th>Price</th>
+                    <th>Event Information</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td th:text="${ticket.type}" style="color: #000;"></td>
+                    <td th:text="${ticket.rowNumber}" style="color: #000;"></td>
+                    <td th:text="${ticket.placeNumber}" style="color: #000;"></td>
+                    <td th:text="${ticket.price}" style="color: #000;"></td>
+                    <td>
+                        <h6 th:text="${ticket.event.name}" style="color: #000;"></h6>
+                        <p th:text="${ticket.event.date}" style="color: #000;"></p>
+                        <!-- Add more event information as needed -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>
 
-    <div th:each="ticket : ${tickets}">
-        <div>
-            <p th:text="${ticket.type}"></p>
-            <p th:text="${ticket.rowNumber}"></p>
-            <p th:text="${ticket.placeNumber}"></p>
-            <p th:text="${ticket.price}"></p>
-            <!-- Add more ticket information as needed -->
-            <!-- Display event information -->
-            <div>
-                <h4>Event Information:</h4>
-                <p th:text="${ticket.event.name}"></p>
-                <p th:text="${ticket.event.date}"></p>
-                <!-- Add more event information as needed -->
-            </div>
-        </div>
-        <hr/> <!-- Add a horizontal line between tickets for better separation -->
-    </div>
 
+</div>
+
+
+
+</div>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
