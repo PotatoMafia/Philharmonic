@@ -148,7 +148,7 @@
               <a class="nav-link" href="\edit_event">EDIT EVENTS<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="\logout">LOGOUT</a>
+              <a class="nav-link" href="/logout">LOGOUT</a>
             </li>
             <li><a class="btn btn-warning" th:href="@{/index}">TO MAIN PAGE</a></li>
           </ul>
@@ -184,8 +184,8 @@
 
         <td>
           <form method="post" th:action="@{/updateEventName}">
-            <input type="hidden" name="eventId" th:value="${event.eventId}" />
-            <input type="text" name="newName" th:value="${event.name}" class="form-control resizable-input" />
+            <input type="hidden" name="eventId" th:value="${event.eventId}"  />
+            <input type="text" name="newName" th:value="${event.name}" maxlength="50" class="form-control resizable-input" />
             <button type="submit" class="btn btn-success">Save</button>
           </form>
         </td>
@@ -196,7 +196,7 @@
         <td>
           <form method="post" th:action="@{/updateEventDescription}">
             <input type="hidden" name="eventId" th:value="${event.eventId}" />
-            <input type="text" name="newDescription" th:value="${event.description}" class="form-control resizable-input" />
+            <input type="text" name="newDescription" th:value="${event.description}" maxlength="35" class="form-control resizable-input" />
             <button type="submit" class="btn btn-success">Save</button>
           </form>
         </td>
@@ -233,11 +233,11 @@
     <h2>Add new Event</h2>
     <div class="form-group">
       <label for="newEventName">Event Name:</label>
-      <input type="text" id="newEventName" name="name" placeholder="Enter event name" required class="form-control" />
+      <input type="text" id="newEventName" name="name" maxlength="50" placeholder="Enter event name" required class="form-control" />
     </div>
     <div class="form-group">
       <label for="newEventDate">Event Date:</label>
-      <input type="date" id="newEventDate" name="date" required class="form-control" />
+      <input type="date" id="newEventDate" name="date"  required class="form-control" />
     </div>
     <div class="form-group">
       <label for="newEventTime">Event Time:</label>
@@ -245,11 +245,11 @@
     </div>
     <div class="form-group">
       <label for="newEventDescription">Event Description:</label>
-      <textarea id="newEventDescription" name="description" placeholder="Enter event description" required class="form-control "></textarea>
+      <textarea id="newEventDescription" name="description" maxlength="35" placeholder="Enter event description" required class="form-control "></textarea>
     </div>
     <div class="form-group">
       <label for="newEventVenue">Event Venue:</label>
-      <input type="text" id="newEventVenue" name="venue" placeholder="Enter event venue" required class="form-control" />
+      <input type="text" id="newEventVenue" name="venue" maxlength="1" placeholder="Enter event venue" required class="form-control" />
     </div>
     <div class="form-group">
       <label for="newEventArtist" style="color: black;">Event Artist:</label>

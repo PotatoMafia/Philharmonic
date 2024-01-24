@@ -20,7 +20,8 @@ public class LoginController {
 
     @Autowired
     private CustomerService customerService;
-
+    @Autowired
+    private HttpSession session;
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
@@ -29,7 +30,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
+    public String processLogin(@RequestParam String email, @RequestParam String password, Model model) {
         log.info("Test processLogin [{}]", email);
 
         String role = customerService.login(email, password);
@@ -59,11 +60,10 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
-
-        session.setAttribute("registered", false);
-
-        return "index";
+    public String logout() {
+        session.invalidate();
+        log.info("Logged out");
+        return "login";
     }
 
 }

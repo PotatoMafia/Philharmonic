@@ -231,7 +231,7 @@
               <a class="nav-link" href="\edit_event">EDIT EVENTS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="\logout">LOGOUT</a>
+              <a class="nav-link" href="/logout">LOGOUT</a>
             </li>
             <li><a class="btn btn-warning" th:href="@{/index}">TO MAIN PAGE</a></li>
           </ul>
@@ -277,14 +277,14 @@
         <td>
           <form method="post" th:action="@{/updateEmployeeName}">
             <input type="hidden" name="email" th:value="${employee.email}" />
-            <input type="text" name="newName" th:value="${employee.name}" class="form-control resizable-input" />
+            <input type="text" name="newName" th:value="${employee.name}" maxlength="20" class="form-control resizable-input" />
             <button type="submit" class="btn btn-success">Save</button>
           </form>
         </td>
         <td>
           <form method="post" th:action="@{/updateEmployeeSurname}">
             <input type="hidden" name="email" th:value="${employee.email}" />
-            <input type="text" name="newSurname" th:value="${employee.surname}" class="form-control resizable-input" />
+            <input type="text" name="newSurname" th:value="${employee.surname}" maxlength="30" class="form-control resizable-input" />
             <button type="submit" class="btn btn-success">Save</button>
           </form>
         </td>
@@ -295,21 +295,21 @@
         <td>
           <form method="post" th:action="@{/updateJobTitle}">
             <input type="hidden" name="email" th:value="${employee.email}" />
-            <input type="text" name="newJobTitle" th:value="${employee.jobTitle}" class="form-control resizable-input"  />
+            <input type="text" name="newJobTitle" th:value="${employee.jobTitle}" maxlength="100" class="form-control resizable-input"  />
             <button type="submit" class="btn btn-success save-button full-width">Save</button>
           </form>
         </td>
         <td>
           <form method="post" th:action="@{/updateStreet}">
             <input type="hidden" name="email" th:value="${employee.email}" />
-            <input type="text" name="newStreet" th:value="${employee.street}" class="form-control resizable-input" />
+            <input type="text" name="newStreet" th:value="${employee.street}" maxlength="100" class="form-control resizable-input" />
             <button type="submit" class="btn btn-success save-button full-width">Save</button>
           </form>
         </td>
         <td>
           <form method="post" th:action="@{/updateLocalNumber}">
             <input type="hidden" name="email" th:value="${employee.email}" />
-            <input type="text" name="newLocalNumber" th:value="${employee.localNumber}" class="form-control resizable-input" />
+            <input type="text" name="newLocalNumber" th:value="${employee.localNumber}" maxlength="6" class="form-control resizable-input" />
             <button type="submit" class="btn btn-success save-button full-width">Save</button>
           </form>
         </td>
@@ -321,7 +321,7 @@
 
         <td>
           <form method="post" th:action="@{/deleteEmployee}">
-            <input type="hidden" name="email" th:value="${employee.email}" />
+            <input type="hidden" name="email" th:value="${employee.email}" maxlength="4" />
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </td>
@@ -377,7 +377,7 @@
         <td>
           <form method="post" th:action="@{/updateSkills}" onsubmit="return validateSkillsForm();">
             <input type="hidden" name="id" th:value="${artist.employeeId}" />
-            <input type="text" name="newSkills" th:value="${artist.skills}" class="form-control resizable-input" required />
+            <input type="text" name="newSkills" th:value="${artist.skills}" maxlength="200" class="form-control resizable-input" required />
             <button type="submit" class="btn btn-success save-button full-width">Save</button>
           </form>
         </td>
@@ -399,11 +399,11 @@
   <h2>Add new Employee</h2>
   <div class="form-group">
     <label for="newEmployeeName">Name:</label>
-    <input type="text" id="newEmployeeName" name="name" placeholder="Enter name" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeeName" name="name" placeholder="Enter name" maxlength="20" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeeSurname">Surname:</label>
-    <input type="text" id="newEmployeeSurname" name="surname" placeholder="Enter surname" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeeSurname" name="surname" placeholder="Enter surname" maxlength="30" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeeGender">Gender:</label>
@@ -415,36 +415,36 @@
 
   <div class="form-group">
     <label for="newEmployeePersonalNumber">Personal Number:</label>
-    <input type="text" id="newEmployeePersonalNumber" name="personalNumber" placeholder="Enter personal number" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeePersonalNumber" name="personalNumber" placeholder="Enter personal number"  maxlength="11" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeeEmail">Email:</label>
-    <input type="email" id="newEmployeeEmail" name="email" placeholder="Enter email" required class="form-control resizable-input" />
+    <input type="email" id="newEmployeeEmail" name="email" placeholder="Enter email" maxlength="100" required class="form-control resizable-input" />
   </div>
 
   <div class="form-group">
     <label for="newEmployeeJobTitle">Job Title:</label>
-    <input type="text" id="newEmployeeJobTitle" name="jobTitle" placeholder="Enter job title" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeeJobTitle" name="jobTitle" placeholder="Enter job title" maxlength="100" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeeStreet">Street:</label>
-    <input type="text" id="newEmployeeStreet" name="street" placeholder="Enter street" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeeStreet" name="street" placeholder="Enter street" maxlength="100" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeeLocalNumber">Local Number:</label>
-    <input type="text" id="newEmployeeLocalNumber" name="localNumber" placeholder="Enter local number" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeeLocalNumber" name="localNumber" placeholder="Enter local number" maxlength="6" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeePostcode">Postcode:</label>
-    <input type="text" id="newEmployeePostcode" name="postCode" placeholder="Enter postcode" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeePostcode" name="postCode" placeholder="Enter postcode"  maxlength="6" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeePayPerHour">Pay per Hour:</label>
-    <input type="text" id="newEmployeePayPerHour" name="payPerHour" placeholder="Enter pay per hour" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeePayPerHour" name="payPerHour" placeholder="Enter pay per hour" maxlength="4" required class="form-control resizable-input" />
   </div>
   <div class="form-group">
     <label for="newEmployeePhoneNumber">Phone Number:</label>
-    <input type="text" id="newEmployeePhoneNumber" name="phoneNumber" placeholder="Enter phone number" required class="form-control resizable-input" />
+    <input type="text" id="newEmployeePhoneNumber" name="phoneNumber" placeholder="Enter phone number" maxlength="15" required class="form-control resizable-input" />
   </div>
 
     <div class="form-group">
@@ -456,7 +456,7 @@
 
       <div class="form-group">
         <label for="newEmployeeSkills">Skills:</label>
-        <input type="text" id="newEmployeeSkills" name="skills" placeholder="Enter skills" class=" resizable-input" />
+        <input type="text" id="newEmployeeSkills" name="skills" placeholder="Enter skills" maxlength="200" class=" resizable-input" />
 <!--        <div id="skillsError" class="invalid-feedback">Please enter skills.</div>-->
       </div>
 

@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.servlet.http.HttpSession;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -19,19 +21,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-
-
+private HttpSession session;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                //.csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/registration", "/login").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
-                .antMatchers("/main").authenticated()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                //.antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/user/**").hasAuthority("USER")
+                //.antMatchers("/main").authenticated()
+                .antMatchers("**/edit_event").access("hasAuthority('ADMIN') and #session.getAttribute('registered')")
+                .antMatchers("**/edit_users").access("hasAuthority('ADMIN') and #session.getAttribute('registered')")
+                .antMatchers("**/edit_employee").access("hasAuthority('ADMIN') and #session.getAttribute('registered')")
+                .antMatchers("**/main_admin").access("hasAuthority('ADMIN') and #session.getAttribute('registered')")
+                //.antMatchers("**/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/main_user").access("hasAuthority('USER') and #session.getAttribute('registered')")
                 .antMatchers("/registration").not().fullyAuthenticated();
 //                .and()
 //                .logout()

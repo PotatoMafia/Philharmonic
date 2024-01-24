@@ -31,15 +31,16 @@ public class AppController implements WebMvcConfigurer {
 
     }
 
-    @RequestMapping(value = {"/main_admin"})
-    public String showAdminPage(Model model) {
-        return "admin/main_admin";
-    }
-
-    @RequestMapping(value = {"/main_user"})
-    public String showUserPage(Model model) {
-        return "user/main_user";
-    }
+//    @RequestMapping(value = {"/main_admin"})
+//    public String showAdminPage(Model model) {
+//        if()
+//        return "admin/main_admin";
+//    }
+//
+//    @RequestMapping(value = {"/main_user"})
+//    public String showUserPage(Model model) {
+//        return "user/main_user";
+//    }
 
     @RequestMapping(value = {"/events"})
     public String showEventsPage(Model model) {
